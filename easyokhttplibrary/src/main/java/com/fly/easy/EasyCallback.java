@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import okhttp3.Response;
 
@@ -13,7 +13,7 @@ public interface EasyCallback {
      * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
      * Call {@link Response#isSuccessful()} to determine if the response indicates success.
      */
-    void onResponse(EasyCall call, Response response);
+    void onResponse(EasyCall call, EasyResponse response);
 
     /**
      * Invoked when a network exception occurred talking to the server or when an unexpected

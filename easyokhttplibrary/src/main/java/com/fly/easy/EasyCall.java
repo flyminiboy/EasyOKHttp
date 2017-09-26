@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import java.io.IOException;
 

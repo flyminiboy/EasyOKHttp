@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

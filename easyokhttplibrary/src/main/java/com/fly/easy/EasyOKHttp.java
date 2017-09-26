@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,9 +16,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static fly.com.easy.EasyUtils.checkMapNotEmpty;
-import static fly.com.easy.EasyUtils.checkNotNull;
 
 /**
  * 作者 ${郭鹏飞}.<br/>
@@ -88,8 +85,8 @@ public class EasyOKHttp {
         if (headers.size() > 1) {
             throw new IllegalArgumentException("Only one Domain-Name in the headers");
         }
-        checkNotNull(mBaseUrls, "mBaseUrls == null");
-        checkMapNotEmpty(mBaseUrls, "mBaseUrls is empty");
+        EasyUtils.checkNotNull(mBaseUrls, "mBaseUrls == null");
+        EasyUtils.checkMapNotEmpty(mBaseUrls, "mBaseUrls is empty");
         String header = request.header(DOMAIN_NAME);
         String url = mBaseUrls.get(header);
         if (TextUtils.isEmpty(url)) {
@@ -131,8 +128,8 @@ public class EasyOKHttp {
      * @return
      */
     public EasyCall createCall(@NonNull Object requestSignature, @NonNull EasyOptions easyOptions) {
-        checkNotNull(requestSignature, "methodSignature == null");
-        checkNotNull(easyOptions, "easyOptions == null");
+        EasyUtils.checkNotNull(requestSignature, "methodSignature == null");
+        EasyUtils.checkNotNull(easyOptions, "easyOptions == null");
         if (httpClient == null) {
             initHttpClient();
         }
@@ -176,8 +173,8 @@ public class EasyOKHttp {
         }
 
         public Builder baseUrls(Map<String, String> otherBaseUrls) {
-            checkNotNull(otherBaseUrls, "otherBaseUrls == null");
-            checkMapNotEmpty(otherBaseUrls, "otherBaseUrls is empty");
+            EasyUtils.checkNotNull(otherBaseUrls, "otherBaseUrls == null");
+            EasyUtils.checkMapNotEmpty(otherBaseUrls, "otherBaseUrls is empty");
             this.otherBaseUrls = otherBaseUrls;
             return this;
         }
@@ -188,7 +185,7 @@ public class EasyOKHttp {
          * @see #baseUrl(HttpUrl)
          */
         public Builder baseUrl(String baseUrl) {
-            checkNotNull(baseUrl, "baseUrl == null");
+            EasyUtils.checkNotNull(baseUrl, "baseUrl == null");
             HttpUrl httpUrl = HttpUrl.parse(baseUrl);
             if (httpUrl == null) {
                 throw new IllegalArgumentException("Illegal URL: " + baseUrl);
@@ -197,7 +194,7 @@ public class EasyOKHttp {
         }
 
         private Builder baseUrl(HttpUrl baseUrl) {
-            checkNotNull(baseUrl, "baseUrl == null");
+            EasyUtils.checkNotNull(baseUrl, "baseUrl == null");
             List<String> pathSegments = baseUrl.pathSegments();
             if (!"".equals(pathSegments.get(pathSegments.size() - 1))) {
                 throw new IllegalArgumentException("baseUrl must end in /: " + baseUrl);

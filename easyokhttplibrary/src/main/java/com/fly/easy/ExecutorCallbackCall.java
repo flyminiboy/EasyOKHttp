@@ -1,12 +1,10 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static fly.com.easy.EasyUtils.checkNotNull;
 
 /**
  * 作者 ${郭鹏飞}.<br/>
@@ -36,10 +34,10 @@ public class ExecutorCallbackCall implements EasyCall {
 
     @Override
     public void enqueue(final EasyCallback callback) {
-        checkNotNull(callback, "callback == null");
+        EasyUtils.checkNotNull(callback, "callback == null");
         delegate.enqueue(new EasyCallback() {
             @Override
-            public void onResponse(EasyCall call, final Response response) {
+            public void onResponse(EasyCall call, final EasyResponse response) {
                 callbackExecutor.execute(new Runnable() {
                     @Override
                     public void run() {

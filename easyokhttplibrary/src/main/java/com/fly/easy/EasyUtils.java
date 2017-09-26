@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;

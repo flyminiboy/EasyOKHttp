@@ -1,8 +1,6 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import java.io.IOException;
-
-import okhttp3.Response;
 
 /**
  * 作者 ${郭鹏飞}.<br/>
@@ -10,13 +8,13 @@ import okhttp3.Response;
 
 public class EasyResponseFailedException extends IOException {
 
-    private Response mResponse;
+    private EasyResponse mResponse;
 
-    public EasyResponseFailedException(Response response) {
+    public EasyResponseFailedException(EasyResponse response) {
         mResponse = response;
     }
 
-    public Response getResponse() {
+    public EasyResponse getResponse() {
         return mResponse;
     }
 

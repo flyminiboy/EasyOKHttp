@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import android.os.Handler;
 import android.os.Looper;

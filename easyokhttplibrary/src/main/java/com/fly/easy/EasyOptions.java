@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import android.support.annotation.IntDef;
 import android.text.TextUtils;
@@ -8,9 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static fly.com.easy.EasyUtils.checkMapNotEmpty;
-import static fly.com.easy.EasyUtils.checkNotNull;
 
 /**
  * 作者 ${郭鹏飞}.<br/>
@@ -78,7 +75,7 @@ public class EasyOptions {
          * @param url 地址
          */
         public OKHttpOptionsBuilder url(String url) {
-            checkNotNull(url, "url == null");
+            EasyUtils.checkNotNull(url, "url == null");
             this.url = url;
             return this;
         }
@@ -89,7 +86,7 @@ public class EasyOptions {
          * @param path 地址
          */
         public OKHttpOptionsBuilder path(String path) {
-            checkNotNull(path, "path == null");
+            EasyUtils.checkNotNull(path, "path == null");
             this.path = path;
             return this;
         }
@@ -133,8 +130,8 @@ public class EasyOptions {
          * @param value 值
          */
         public OKHttpOptionsBuilder param(String key, Object value) {
-            checkNotNull(key, "key == null");
-            checkNotNull(value, "value == null");
+            EasyUtils.checkNotNull(key, "key == null");
+            EasyUtils.checkNotNull(value, "value == null");
             if (params == null) {
                 params = new HashMap<>();
             }
@@ -148,8 +145,8 @@ public class EasyOptions {
          * @param params 键值对的参数集合
          */
         public OKHttpOptionsBuilder params(Map<String, Object> params) {
-            checkNotNull(params, "params == null");
-            checkMapNotEmpty(params, "params is empty");
+            EasyUtils.checkNotNull(params, "params == null");
+            EasyUtils.checkMapNotEmpty(params, "params is empty");
             if (this.params == null) {
                 this.params = params;
             } else {
@@ -164,8 +161,8 @@ public class EasyOptions {
          * @param header
          */
         public OKHttpOptionsBuilder header(Map<String, String> header) {
-            checkNotNull(header, "header == null");
-            checkMapNotEmpty(header, "header is empty");
+            EasyUtils.checkNotNull(header, "header == null");
+            EasyUtils.checkMapNotEmpty(header, "header is empty");
             this.sigHeaders = header;
             return this;
         }
@@ -176,8 +173,8 @@ public class EasyOptions {
          * @param headers
          */
         public OKHttpOptionsBuilder headers(Map<String, List<String>> headers) {
-            checkNotNull(headers, "headers == null");
-            checkMapNotEmpty(headers, "headers is empty");
+            EasyUtils.checkNotNull(headers, "headers == null");
+            EasyUtils.checkMapNotEmpty(headers, "headers is empty");
             this.mulHeaders = headers;
             return this;
         }

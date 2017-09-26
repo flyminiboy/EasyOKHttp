@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import android.support.annotation.Nullable;
 
@@ -7,8 +7,7 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static fly.com.easy.EasyUtils.checkNotNull;
+import okhttp3.ResponseBody;
 
 /**
  * 作者 ${郭鹏飞}.<br/>
@@ -37,6 +36,14 @@ final class EasyCallImpl implements EasyCall {
             throw new NullPointerException("httpClient returned null by newCall");
         }
         return call;
+    }
+
+    private EasyResponse parseResponse(okhttp3.Response rawResponse) throws IOException {
+
+        ResponseBody rawBody = rawResponse.body();
+
+        return new EasyResponse(rawResponse, rawBody);
+
     }
 
     @Override
@@ -85,7 +92,7 @@ final class EasyCallImpl implements EasyCall {
 
     @Override
     public void enqueue(final EasyCallback callback) {
-        checkNotNull(callback, "callback == null");
+        EasyUtils.checkNotNull(callback, "callback == null");
 
         Call call;
         Throwable failure;
@@ -118,7 +125,7 @@ final class EasyCallImpl implements EasyCall {
             @Override
             public void onResponse(Call call, Response response)
                     throws IOException {
-                callSuccess(response);
+                callSuccess(parseResponse(response));
             }
 
             @Override
@@ -138,7 +145,7 @@ final class EasyCallImpl implements EasyCall {
                 }
             }
 
-            private void callSuccess(Response response) {
+            private void callSuccess(EasyResponse response) {
                 try {
                     callback.onResponse(EasyCallImpl.this, response);
                 } catch (Throwable t) {

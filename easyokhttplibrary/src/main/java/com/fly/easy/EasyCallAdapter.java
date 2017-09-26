@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 /**
  * 作者 ${郭鹏飞}.<br/>

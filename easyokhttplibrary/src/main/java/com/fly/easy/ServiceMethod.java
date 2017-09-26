@@ -1,4 +1,4 @@
-package fly.com.easy;
+package com.fly.easy;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,10 +11,6 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-
-import static fly.com.easy.EasyOptions.JSON;
-import static fly.com.easy.EasyUtils.checkListNotEmpty;
-import static fly.com.easy.EasyUtils.checkStringArgument;
 
 
 /**
@@ -64,8 +60,8 @@ import static fly.com.easy.EasyUtils.checkStringArgument;
             if (easyOptions.sigHeaders != null && !easyOptions.sigHeaders.isEmpty()) {
                 for (Map.Entry<String, String> headers :
                         easyOptions.sigHeaders.entrySet()) {
-                    checkStringArgument(headers.getKey(), "header key == null");
-                    checkStringArgument(headers.getValue(), "header value == null");
+                    EasyUtils.checkStringArgument(headers.getKey(), "header key == null");
+                    EasyUtils.checkStringArgument(headers.getValue(), "header value == null");
                     builder.header(headers.getKey(), headers.getValue());
                 }
             }
@@ -73,12 +69,12 @@ import static fly.com.easy.EasyUtils.checkStringArgument;
                 for (Map.Entry<String, List<String>> headers :
                         easyOptions.mulHeaders.entrySet()) {
                     String key = headers.getKey();
-                    checkStringArgument(headers.getKey(), "addHeader key == null");
+                    EasyUtils.checkStringArgument(headers.getKey(), "addHeader key == null");
                     List<String> values = headers.getValue();
-                    checkListNotEmpty(values, "addHeader values == null or empty");
+                    EasyUtils.checkListNotEmpty(values, "addHeader values == null or empty");
                     for (String value :
                             values) {
-                        checkStringArgument(value, "addHeader value == null");
+                        EasyUtils.checkStringArgument(value, "addHeader value == null");
                         builder.addHeader(key, value);
                     }
                 }
@@ -107,7 +103,7 @@ import static fly.com.easy.EasyUtils.checkStringArgument;
                 if (easyOptions.params != null) {
                     body = getBodyByParams(easyOptions.params);
                 } else {
-                    if (easyOptions.postType == JSON) {
+                    if (easyOptions.postType == EasyOptions.JSON) {
                         body = RequestBody.create(MEDIA_TYPE, "");
                     } else {
                         FormBody.Builder formBilder = new FormBody.Builder();
@@ -121,7 +117,7 @@ import static fly.com.easy.EasyUtils.checkStringArgument;
 
         private RequestBody getBodyByParams(Map<String, Object> params) {
             RequestBody body;
-            if (easyOptions.postType == JSON) {
+            if (easyOptions.postType == EasyOptions.JSON) {
                 JSONObject json = new JSONObject();
                 for (Map.Entry<String, Object> param : params.entrySet()) {
                     try {
